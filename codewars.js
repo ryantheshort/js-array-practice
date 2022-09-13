@@ -150,15 +150,5 @@ You have 30 bytes to spare.
 
 Example: [1, 2, 3] → [3, 2, 1] */
 
-//incomplete...
-var exArray = [1,2,3];
 
-console.log(revArray(exArray));
-
-function revArray(inputArray){
-	backArr = [];
-	for(var i = inputArray.length-1; i >=0; i--){
-		backArr.push(inputArray[i]);
-	}
-	return backArr;
-};
+reverse=a=>[...a].map(a.pop,a)
