@@ -7,15 +7,22 @@
 
 //var what = createNewArray('hi',6);
 //console.log(what);
-
-function createNewArray (word,number){
-	var myNewArray=[];
-	for(var i = 0; i < number; i++){
-		myNewArray[i]=word.toString();
+//my answer:
+// function createNewArray (word,number){
+// 	const myNewArray=[];
+// 	for(let i = 0; i < number; i++){
+// 		myNewArray[i]=word.toString();
+// 	}
+// 	return myNewArray;
+// };
+// answer in review:
+function myFunction(str, i) {
+	const result = [];
+	for(let j = 0; j < i; j++) {
+		result.push(str);
 	}
-	return myNewArray;
-};
-
+	return result;
+}
 
 
 // -----------------------------------------------
@@ -30,15 +37,22 @@ function createNewArray (word,number){
 
 //var what = reverseArray(['hi','how','are','you']);
 //console.log(what);
-
-function reverseArray(inputArray){
-	var myBackwardsArray = [];
-	for(i = inputArray.length -1; i >=0; i--){
-		myBackwardsArray.push(inputArray[i]);
-	};
-	return myBackwardsArray;
-};
-
+//my answer:
+// function reverseArray(inputArray){
+// 	var myBackwardsArray = [];
+// 	for(i = inputArray.length -1; i >=0; i--){
+// 		myBackwardsArray.push(inputArray[i]);
+// 	};
+// 	return myBackwardsArray;
+// };
+//review answer: unshift - adds one or more elements to the beginning of an array and returns the new length of the array.
+function reverseArray(arr) {
+	const result = [];
+	for(let i = 0; i < arr.length; i++) {
+		result.unshift(arr[i]);
+	}
+	return result;
+}
 
 
 
@@ -55,16 +69,22 @@ function reverseArray(inputArray){
 
 //var what = noFalsy([0,'hi', 0n,'how', null,'are', undefined,'you', false,'today', NaN,'FUN'])
 //console.log(what);
+//my answer:
+// function noFalsy(inputArray){
+// 	for(let i = 0; i < inputArray.length;i++){
+// 		if(!inputArray[i]){
+// 			inputArray.splice(i,1);
+// 		};
+// 	};
+// 	return inputArray;
+// };
+//=======reviewed answer:========
 
-function noFalsy(inputArray){
-	for(var i = 0; i <inputArray.length;i++){
-		if(!inputArray[i]){
-			inputArray.splice(i,1);
-		};
-	};
-	return inputArray;
-};
-
+function removeFalsyValues(arr) {
+	return arr.filter(function(ele) {
+		return Boolean(ele); //could also do: return!!ele;
+	});
+}
 
 
 
@@ -85,18 +105,33 @@ function noFalsy(inputArray){
 //const myArray = [['name', 'Charlie'], ['color', 'brown'], ['age', 10]];
 //var what = returnProperties(myArray);
 //console.log(what);
+//my answer:
+// function returnProperties (inputArray) {
+// 	const myArray = [];
+// 	for(let i = 0; i < inputArray.length; i++) {
+// 		for(let j = 0; j < inputArray[i].length; j++) {
+// 			myArray.push(inputArray[i][j] + ': '+ inputArray[i][j+1]);
+// 			j+=1;
+// 		};
+// 	};
+// 	return myArray;
+// };
 
-function returnProperties (inputArray) {
-	var myArray = [];
-	for(var i = 0; i < inputArray.length; i++) {
-		for(var j = 0; j < inputArray[i].length; j++) {
-			myArray.push(inputArray[i][j] + ': '+ inputArray[i][j+1]);
-			j+=1;
-		};
-	};
-	return myArray;
-};
+//review answer:===============
+function answer1(arr) {
+	const result = {};
+	for(let i = 0; i < arr.length; i++) {
+		result[arr[i][0]] = arr[i][1];
+	}
+	return result;
+}
 
+function answer2(arr) {
+	const result = {};
+	for(const index of arr) {
+		result[index[0]] = index[1];
+	}
+}
 
 
 
@@ -114,21 +149,28 @@ function returnProperties (inputArray) {
 //var what = removeDupes(testArray);
 //console.log(what);
 
-function removeDupes(inputArray){
-	var uniqueChars = [];
-	inputArray.forEach((c) => {
-		if (!uniqueChars.includes(c)) {
-			uniqueChars.push(c);
-		};
-	});
-	return uniqueChars;
-};
+// function removeDupes(inputArray){
+// 	const uniqueChars = [];
+// 	inputArray.forEach((c) => {
+// 		if (!uniqueChars.includes(c)) {
+// 			uniqueChars.push(c);
+// 		}
+// 	})
+// 	return uniqueChars;
+// }
 
+// reviewed answer ============
 
+function removeDuplicates(arr) {
+	const result = [];
 
-
-
-
+	for(let i = 0; i < arr.length; i++) {
+		if(!result.includes(arr[i])) {
+			result.push(i);
+			//element & index will change for each element. the array will not.
+		}
+	}
+}
 
 // -----------------------------------------------
 
@@ -163,8 +205,8 @@ function compareArrays(arr1, arr2){
 // first array and if some of them
 // include the elements in the second
 // array then return true.
-	var count =0;
-	if(arr1.length === arr2.length){
+	const count = 0;
+	if(arr1.length === arr2.length){ //checks to see 'IF' arr1 and 2 are equal
 		for(i=0;i < arr1.length;i++){
 			if(arr2.includes(arr1[i])){
 				count +=1;
@@ -179,6 +221,29 @@ function compareArrays(arr1, arr2){
 	
 };
 
+//=========answer from review:====================
+
+function compareArrays(arr1, arr2) {
+	if(arr1.length !== arr2.length){
+		return false;
+	}
+	arr1.sort();
+	arr2.sort();
+
+
+	for(let i = 0; i < arr1.length; i++) {
+		if(arr1[i] !== arr2[i]) {
+			return false;
+		}s
+	}
+	return true;
+}
+//there's no reason to loop here if the array is not the same.
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+// compareFn(a, b) return value						sort order
+// 					> 0								sort a after b
+//					< 0								sort a before b
+//					=== 0 							keep original order of a and b
 
 
 // -----------------------------------------------
@@ -220,7 +285,10 @@ function compareArrays(arr1, arr2){
 // ---------------------
 
 // Put your answer below -------------------------
-
+// function split(arr) {
+// 	const result = [];
+// 	for(let )
+// }
 
 
 
